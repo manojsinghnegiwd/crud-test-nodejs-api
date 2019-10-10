@@ -30,6 +30,7 @@ Also you have to rebuild your docker image if you add any new package to the pro
 
 ```
 docker-compose -f docker-compose.yml rm app
+docker-compose build
 docker-compose up
 ```
 
