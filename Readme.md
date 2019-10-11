@@ -29,8 +29,7 @@ The setup will take time just for the first time afterwards it will be fast.
 Also you have to rebuild your docker image if you add any new package to the project. For rebuilding execute these commands one by one
 
 ```
-docker-compose -f docker-compose.yml rm app
-docker-compose build
+yarn rebuild
 docker-compose up
 ```
 
