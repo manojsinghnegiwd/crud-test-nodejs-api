@@ -4,12 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon index.js"
+    "start": "./node_modules/.bin/nodemon index.js",
+    "test": "./node_modules/.bin/mocha 'tests/**/*.js'"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "express": "^4.17.1",
+    "mocha": "^6.2.1",
     "mongoose": "^5.7.4",
     "nodemon": "^1.19.3",
+    "request": "^2.88.0",
     "swagger-ui-express": "^4.1.2"
   }
 }
