@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "./node_modules/.bin/nodemon index.js",
-    "test": "./node_modules/.bin/mocha 'tests/**/*.js'"
+    "test": "./node_modules/.bin/mocha 'tests/**/*.js'",
+    "rebuild": "docker-compose -f docker-compose.yml rm app && docker-compose build"
   },
   "dependencies": {
     "chai": "^4.2.0",
