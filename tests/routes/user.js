@@ -59,6 +59,34 @@ describe('User API', () => {
           })
         })
       })
+
+      describe('Create user duplicate', () => {
+        const payload = {
+          firstName: "John",
+          lastName: "Doe",
+          email: "johndoe@recraftrelic.com",
+          password: "johndoe",
+          employeeNo: "213"
+        }
+  
+        it('Status', done => {
+          request.post('http://localhost:3000/user', {
+            json: payload
+          }, (_, response) => {
+            expect(response.statusCode).to.equal(400)
+            done()
+          })
+        })
+  
+        it('Message', done => {
+          request.post('http://localhost:3000/user', {
+            json: payload
+          }, (_, response) => {
+            expect(response.body.errors.duplicate[0]).to.equal('User with this email id already exist')
+            done()
+          })
+        })
+      })
     })
 
     it('Create user SUCCESS', done => {
