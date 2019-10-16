@@ -9,8 +9,11 @@
     "rebuild": "docker-compose -f docker-compose.yml rm app && docker-compose build"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "express": "^4.17.1",
+    "is_js": "^0.9.0",
+    "micro-validator": "^0.0.5",
     "mocha": "^6.2.1",
     "mongoose": "^5.7.4",
     "nodemon": "^1.19.3",
