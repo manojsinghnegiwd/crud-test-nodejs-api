@@ -36,7 +36,7 @@ userRouter.post('/', async (req, res) => {
     const record = await userModel.find({ email: req.body.email })
 
     // If exist
-    if (!record.length) {
+    if (record.length) {
       res.status(400).json({
         errors: {
           duplicate: ['User with this email id already exist']
@@ -56,11 +56,11 @@ userRouter.post('/', async (req, res) => {
         res.status(200).json({ message: 'User created successfully' })
       })
       .catch(err => {
-        res.status(502).json({ message: 'Something went wrong. Unable to create user' })
+        throw new Error('Something went wrong. Unable to create user')
       })
 
   } catch (error) {
-    res.status(502).json({ message: 'Something went wrong. Unable to create user' })
+    console.log(error)
   }
 })
 
