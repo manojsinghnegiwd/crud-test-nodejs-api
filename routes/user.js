@@ -56,7 +56,7 @@ userRouter.post('/', async (req, res) => {
         res.status(200).json({ message: 'User created successfully' })
       })
       .catch(err => {
-        throw new Error('Something went wrong. Unable to create user')
+        res.status(400).json({ message: 'Something went wrong. Unable to create user' })
       })
 
   } catch (error) {
