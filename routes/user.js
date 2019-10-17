@@ -1,4 +1,5 @@
 const is = require('is_js')
+const bcrypt = require('bcrypt')
 const { Router } = require('express')
 const { validate } = require('micro-validator').default
 
@@ -6,6 +7,20 @@ const userValidations = require('../validation/user')
 const { userModel } = require('../models/user')
 
 const userRouter = Router()
+
+const saltRounds = 10
+
+const generatePassword = (rawPassword = '') =>
+  new Promise (
+    (resolve, reject) => {
+      bcrypt.hash(rawPassword, saltRounds, function(err, hash) {
+        if (err) {
+          reject(err)
+        }
+        resolve(hash)
+      })
+    }
+  )
 
 userRouter.post('/', async (req, res) => {
 
@@ -21,24 +36,32 @@ userRouter.post('/', async (req, res) => {
     const record = await userModel.find({ email: req.body.email })
 
     // If exist
-    if (record.length) {
+    if (!record.length) {
       res.status(400).json({
         errors: {
           duplicate: ['User with this email id already exist']
         }
       })
+
+      throw new Error('User with this email id already exist')
     }
 
-  } catch (error) {
-    console.log(error)
-  }
+    const hashedPassword = await generatePassword(req.body.password)
 
-  // If not exist
-    // Create a new user
-  // Else
-    // Return a duplicate user record error
-  
-  res.status(200).json({ message: 'success' })
+    const User = new userModel({...req.body, password: hashedPassword})
+
+    User
+      .save()
+      .then(() => {
+        res.status(200).json({ message: 'User created successfully' })
+      })
+      .catch(err => {
+        res.status(502).json({ message: 'Something went wrong. Unable to create user' })
+      })
+
+  } catch (error) {
+    res.status(502).json({ message: 'Something went wrong. Unable to create user' })
+  }
 })
 
 module.exports = userRouter
