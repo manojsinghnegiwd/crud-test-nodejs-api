@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const request = require('request');
+const { TESTING_URL } = require('../../constants/tests')
 
 describe('User API', () => {
   describe('CREATE USER', () => {
@@ -14,7 +15,7 @@ describe('User API', () => {
         }
   
         it('Status', done => {
-          request.post('http://localhost:3000/user', {
+          request.post(`${TESTING_URL}/user`, {
             json: payload
           }, (_, response) => {
             expect(response.statusCode).to.equal(400)
@@ -23,7 +24,7 @@ describe('User API', () => {
         })
   
         it('Message', done => {
-          request.post('http://localhost:3000/user', {
+          request.post(`${TESTING_URL}/user`, {
             json: payload
           }, (_, response) => {
             expect(response.body.errors.firstName[0]).to.equal('First Name is required')
@@ -42,7 +43,7 @@ describe('User API', () => {
         }
   
         it('Status', done => {
-          request.post('http://localhost:3000/user', {
+          request.post(`${TESTING_URL}/user`, {
             json: payload
           }, (_, response) => {
             expect(response.statusCode).to.equal(400)
@@ -51,7 +52,7 @@ describe('User API', () => {
         })
   
         it('Message', done => {
-          request.post('http://localhost:3000/user', {
+          request.post(`${TESTING_URL}/user`, {
             json: payload
           }, (_, response) => {
             expect(response.body.errors.email[0]).to.equal('Email is invalid')
@@ -70,7 +71,7 @@ describe('User API', () => {
         }
   
         it('Status', done => {
-          request.post('http://localhost:3000/user', {
+          request.post(`${TESTING_URL}/user`, {
             json: payload
           }, (_, response) => {
             expect(response.statusCode).to.equal(400)
@@ -79,7 +80,7 @@ describe('User API', () => {
         })
   
         it('Message', done => {
-          request.post('http://localhost:3000/user', {
+          request.post(`${TESTING_URL}/user`, {
             json: payload
           }, (_, response) => {
             expect(response.body.errors.duplicate[0]).to.equal('User with this email id already exist')
@@ -90,7 +91,7 @@ describe('User API', () => {
     })
 
     it('Create user SUCCESS', done => {
-      request.post('http://localhost:3000/user', {
+      request.post(`${TESTING_URL}/user`, {
         json: {
           firstName: "John",
           lastName: "Doe",
