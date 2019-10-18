@@ -35,7 +35,7 @@ describe('User API', () => {
 
       describe('Create user invalid email field', () => {
         const payload = {
-          firstName: "",
+          firstName: "firstname",
           lastName: "Doe",
           email: "johndoe",
           password: "johndoe",
