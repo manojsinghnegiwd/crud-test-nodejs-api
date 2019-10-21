@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const request = require('request');
-const { TESTING_URL } = require('../../constants/tests')
+const { TESTING_URL } = require('../../../constants/tests')
 
 describe('User API', () => {
   describe('CREATE USER', () => {
@@ -35,7 +35,7 @@ describe('User API', () => {
 
       describe('Create user invalid email field', () => {
         const payload = {
-          firstName: "",
+          firstName: "firstname",
           lastName: "Doe",
           email: "johndoe",
           password: "johndoe",
