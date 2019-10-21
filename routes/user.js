@@ -64,4 +64,29 @@ userRouter.post('/', async (req, res) => {
   }
 })
 
+userRouter.delete('/:user_id/delete', async (req, res) => {
+  const { user_id = '' } = req.params
+  
+  if (!user_id.trim()) {
+    return res.status(400).json({ errors: ['You have to provide a user_id'] })
+  }
+
+  try {
+    const record = await userModel.findById(user_id)
+
+    if (!record) {
+      return res.status(400).json({ errors: ['Please provide a valid user_id'] })
+    } else {
+      userModel.findByIdAndRemove(user_id)
+        .then(() => res.status(200).json({ message: 'User deleted successfully' }))
+        .catch(error => console.log(error))
+    }
+
+  } catch (error) {
+    if (error.name == "CastError") {
+      return res.status(400).json({ errors: ['Please provide a valid user_id'] })
+    }
+  }
+})
+
 module.exports = userRouter
