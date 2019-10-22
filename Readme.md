@@ -10,7 +10,7 @@ This application have docker integrated. Install docker first
 clone this repo to your system
 
 ```
-git clone git@gitlab.com:reacraft-studio/crafters-hub-backend.git
+git clone https://github.com/manojsinghnegiwd/crud-test-nodejs-api.git
 ```
 
 for starting the development server make sure you are in the root of the project and then type
